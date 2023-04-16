@@ -48,8 +48,6 @@ void switch_init( void ) {
     EICRA |= (1 << ISC31) | (1 << ISC30);  // Trigger on falling edge
     EIMSK |= (1 << INT3);                  // Activate External Interrupt
     #endif 
-  
-    sei();
 }
 
 #ifdef SWITCH00
