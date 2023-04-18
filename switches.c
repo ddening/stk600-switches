@@ -1,11 +1,27 @@
+/*************************************************************************
+* Title     : switches.c
+* Author    : Dimitri Dening
+* Created   : 11.04.2023
+* Software  : Microchip Studio V7
+* Hardware  : Atmega2560, STK600
+        
+DESCRIPTION:
+    STK600-Switches using external interrupts to trigger user-defined functions.
+USAGE:
+    see <switches.h>
+NOTES:
+                       
+*************************************************************************/
+
+/* General libraries */
 #include <stdlib.h>
 #include <stdint.h>
 #include <avr/interrupt.h>
 #include <avr/io.h>
 
+/* User defined libraries */
 #include "switches.h"
 #include "w204.h"
-#include "uart.h"
 
 typedef void (*fn_switch)( void );
 
@@ -20,9 +36,7 @@ void switch_init( void ) {
     fn_switch_01 = &w204_shift_cursor_right;
     fn_switch_02 = &w204_shift_display_left;
     fn_switch_03 = &w204_shift_display_right;
-    
-    // EXT_INT_DDR  = 0x00; // Set all ports as INPUT
-    
+       
     #ifdef SWITCH00
     EXT_INT_DDR &= ~(1 << SWITCH00);       // Configure port as INPUT
     EXT_INT_PORT |= (1 << SWITCH00);       // Pullup (HIGH)
@@ -39,19 +53,17 @@ void switch_init( void ) {
     
     #ifdef SWITCH02
     EXT_INT_DDR &= ~(1 << SWITCH02);       // Configure port as INPUT
-    EXT_INT_PORT |= (1 << SWITCH02);      // Pullup (HIGH)
-    EICRA |= (1 << ISC21) | (1 << ISC20); // Trigger on falling edge
-    EIMSK |= (1 << INT2);                 // Activate External Interrupt
+    EXT_INT_PORT |= (1 << SWITCH02);       // Pullup (HIGH)
+    EICRA |= (1 << ISC21) | (1 << ISC20);  // Trigger on falling edge
+    EIMSK |= (1 << INT2);                  // Activate External Interrupt
     #endif
     
     #ifdef SWITCH03
     EXT_INT_DDR &= ~(1 << SWITCH03);       // Configure port as INPUT
-    EXT_INT_PORT |= (1 << SWITCH03);      // Pullup (HIGH)
-    EICRA |= (1 << ISC31) | (1 << ISC30); // Trigger on falling edge
-    EIMSK |= (1 << INT3);                 // Activate External Interrupt
+    EXT_INT_PORT |= (1 << SWITCH03);       // Pullup (HIGH)
+    EICRA |= (1 << ISC31) | (1 << ISC30);  // Trigger on falling edge
+    EIMSK |= (1 << INT3);                  // Activate External Interrupt
     #endif 
-  
-    sei();
 }
 
 #ifdef SWITCH00
