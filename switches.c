@@ -1,11 +1,27 @@
+/*************************************************************************
+* Title     : switches.c
+* Author    : Dimitri Dening
+* Created   : 11.04.2023
+* Software  : Microchip Studio V7
+* Hardware  : Atmega2560, STK600
+        
+DESCRIPTION:
+    STK600-Switches using external interrupts to trigger user-defined functions.
+USAGE:
+    see <switches.h>
+NOTES:
+                       
+*************************************************************************/
+
+/* General libraries */
 #include <stdlib.h>
 #include <stdint.h>
 #include <avr/interrupt.h>
 #include <avr/io.h>
 
+/* User defined libraries */
 #include "switches.h"
 #include "w204.h"
-#include "uart.h"
 
 typedef void (*fn_switch)( void );
 
