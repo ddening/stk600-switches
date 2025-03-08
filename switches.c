@@ -32,10 +32,11 @@ static fn_switch fn_switch_03 = NULL;
 
 void switch_init( void ) {
    
-    fn_switch_00 = &w204_shift_cursor_left;
-    fn_switch_01 = &w204_shift_cursor_right;
-    fn_switch_02 = &w204_shift_display_left;
-    fn_switch_03 = &w204_shift_display_right;
+	// TODO: Define function that allows custom definition of function->switch
+    //fn_switch_00 = &w204_shift_cursor_left;
+    //fn_switch_01 = &w204_shift_cursor_right;
+    //fn_switch_02 = &w204_shift_display_left;
+    //fn_switch_03 = &w204_shift_display_right;
        
     #ifdef SWITCH00
     EXT_INT_DDR &= ~(1 << SWITCH00);       // Configure port as INPUT
