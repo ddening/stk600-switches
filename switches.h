@@ -43,8 +43,8 @@
 # elif defined(__AVR_ATmega2560__)
 #   define EXT_INT_PORT PORTD
 #   define EXT_INT_DDR DDRD
-#   define SWITCH00 0x00
-#   define SWITCH01 0x01
+//#   define SWITCH00 0x00
+//#   define SWITCH01 0x01
 #   define SWITCH02 0x02
 #   define SWITCH03 0x03
 #else
@@ -53,6 +53,9 @@
 #  endif
 #endif
 
-void switch_init( void );
+typedef void (*fn_switch)(void);
+
+void switch_init(void);
+void assign_switch_function(uint8_t switch_id, fn_switch function);
 
 #endif /* SWITCHES_H_ */

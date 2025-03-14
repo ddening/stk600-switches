@@ -23,8 +23,6 @@ NOTES:
 #include "switches.h"
 #include "w204.h"
 
-typedef void (*fn_switch)(void);
-
 static fn_switch fn_switch_00 = NULL;
 static fn_switch fn_switch_01 = NULL;
 static fn_switch fn_switch_02 = NULL;
@@ -63,10 +61,23 @@ void switch_init(void) {
 
 void assign_switch_function(uint8_t switch_id, fn_switch function) {
 	switch (switch_id) {
+		
+		#ifdef SWITCH00
 		case SWITCH00: fn_switch_00 = function; break;
+		#endif 
+		
+		#ifdef SWITCH01
 		case SWITCH01: fn_switch_01 = function; break;
+		#endif 
+		
+		#ifdef SWITCH02
 		case SWITCH02: fn_switch_02 = function; break;
+		#endif 
+		
+		#ifdef SWITCH03
 		case SWITCH03: fn_switch_03 = function; break;
+		#endif 
+		
 		default: /* Handle error case if needed */ break;
 	}
 }
