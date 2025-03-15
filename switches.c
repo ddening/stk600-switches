@@ -29,7 +29,7 @@ static fn_switch fn_switch_02 = NULL;
 static fn_switch fn_switch_03 = NULL;
 
 void switch_init(void) {
-   
+  
     #ifdef SWITCH00
     EXT_INT_DDR &= ~(1 << SWITCH00);       // Configure port as INPUT
     EXT_INT_PORT |= (1 << SWITCH00);       // Pullup (HIGH)
@@ -60,6 +60,7 @@ void switch_init(void) {
 }
 
 void assign_switch_function(uint8_t switch_id, fn_switch function) {
+  
 	switch (switch_id) {
 		
 		#ifdef SWITCH00
@@ -80,7 +81,6 @@ void assign_switch_function(uint8_t switch_id, fn_switch function) {
 		
 		default: /* Handle error case if needed */ break;
 	}
-}
 
 #ifdef SWITCH00
 ISR(INT0_vect) {
