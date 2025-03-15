@@ -23,20 +23,13 @@ NOTES:
 #include "switches.h"
 #include "w204.h"
 
-typedef void (*fn_switch)( void );
-
 static fn_switch fn_switch_00 = NULL;
 static fn_switch fn_switch_01 = NULL;
 static fn_switch fn_switch_02 = NULL;
 static fn_switch fn_switch_03 = NULL;
 
-void switch_init( void ) {
-   
-    fn_switch_00 = &w204_shift_cursor_left;
-    fn_switch_01 = &w204_shift_cursor_right;
-    fn_switch_02 = &w204_shift_display_left;
-    fn_switch_03 = &w204_shift_display_right;
-       
+void switch_init(void) {
+  
     #ifdef SWITCH00
     EXT_INT_DDR &= ~(1 << SWITCH00);       // Configure port as INPUT
     EXT_INT_PORT |= (1 << SWITCH00);       // Pullup (HIGH)
@@ -65,6 +58,29 @@ void switch_init( void ) {
     EIMSK |= (1 << INT3);                  // Activate External Interrupt
     #endif 
 }
+
+void assign_switch_function(uint8_t switch_id, fn_switch function) {
+  
+	switch (switch_id) {
+		
+		#ifdef SWITCH00
+		case SWITCH00: fn_switch_00 = function; break;
+		#endif 
+		
+		#ifdef SWITCH01
+		case SWITCH01: fn_switch_01 = function; break;
+		#endif 
+		
+		#ifdef SWITCH02
+		case SWITCH02: fn_switch_02 = function; break;
+		#endif 
+		
+		#ifdef SWITCH03
+		case SWITCH03: fn_switch_03 = function; break;
+		#endif 
+		
+		default: /* Handle error case if needed */ break;
+	}
 
 #ifdef SWITCH00
 ISR(INT0_vect) {
