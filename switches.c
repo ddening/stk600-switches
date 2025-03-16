@@ -81,35 +81,36 @@ void assign_switch_function(uint8_t switch_id, fn_switch function) {
 		
 		default: /* Handle error case if needed */ break;
 	}
+}
 
 #ifdef SWITCH00
 ISR(INT0_vect) {
-    if (fn_switch_00 != NULL) {
-        fn_switch_00();
-    }
+	if (fn_switch_00 != NULL) {
+		fn_switch_00();
+	}
 }
 #endif
 
 #ifdef SWITCH01
 ISR(INT1_vect) {
-    if (fn_switch_01 != NULL) {
-        fn_switch_01();
-    }
+	if (fn_switch_01 != NULL) {
+		fn_switch_01();
+	}
 }
 #endif
 
 #ifdef SWITCH02
 ISR(INT2_vect) {
-    if (fn_switch_02 != NULL) {
-        fn_switch_02();
-    }
+	if (fn_switch_02 != NULL) {
+		fn_switch_02();
+	}
 }
 #endif
 
 #ifdef SWITCH03
 ISR(INT3_vect) {
-    if (fn_switch_03 != NULL) {
-        fn_switch_03();
-    }
+	if (fn_switch_03 != NULL) {
+		fn_switch_03();
+	}
 }
 #endif
