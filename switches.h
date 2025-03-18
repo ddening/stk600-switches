@@ -34,7 +34,6 @@
 
 #include <avr/io.h>
 
-/* SPI Port Declaration */
 #if defined(__AVR_ATmega1284P__)
 #   define EXT_INT_PORT PORTD
 #   define EXT_INT_DDR DDRD
